@@ -7,11 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:runtime": "vite build --config vite.runtime.config.ts"
   },
   "dependencies": {
-    "babylonjs": "^8.41.2",
+    "@babylonjs/core": "^8.42.0",
+    "@babylonjs/inspector": "^8.42.0-preview",
+    "@babylonjs/loaders": "^8.42.0",
+    "@babylonjs/serializers": "^8.42.0",
     "babylonjs-editcontrol": "^3.3.0",
+    "jszip": "^3.10.1",
+    "mobx": "^6.15.0",
+    "mobx-react-lite": "^4.1.1",
     "pepjs": "^0.5.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
@@ -22,9 +29,6 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
