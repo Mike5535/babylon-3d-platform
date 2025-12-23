@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { Viewport } from './editor/Viewport';
-import { sceneStore } from './editor/SceneStore';
-import { exportWeb } from './editor/exportWeb';
+import { sceneStore } from './editor/store/SceneStore';
+import { exportWeb } from './editor/utils/exportWeb';
 
 export default observer(function App() {
   return (
@@ -21,6 +21,9 @@ export default observer(function App() {
         <hr />
 
         <button onClick={exportWeb}>Export Web</button>
+        <button onClick={() => sceneStore.setGizmoMode('position')}>Translate</button>
+        <button onClick={() => sceneStore.setGizmoMode('rotation')}>Rotate</button>
+        <button onClick={() => sceneStore.setGizmoMode('scale')}>Scale</button>
       </div>
     </div>
   );

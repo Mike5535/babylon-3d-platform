@@ -1,5 +1,5 @@
 import JSZip from 'jszip';
-import { sceneStore } from './SceneStore';
+import { sceneStore } from '../store/SceneStore';
 import * as BABYLON from '@babylonjs/core';
 import '@babylonjs/serializers';
 

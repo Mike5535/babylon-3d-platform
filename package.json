@@ -12,10 +12,9 @@
   },
   "dependencies": {
     "@babylonjs/core": "^8.42.0",
-    "@babylonjs/inspector": "^8.42.0-preview",
+    "@babylonjs/inspector": "^8.42.0",
     "@babylonjs/loaders": "^8.42.0",
     "@babylonjs/serializers": "^8.42.0",
-    "babylonjs-editcontrol": "^3.3.0",
     "jszip": "^3.10.1",
     "mobx": "^6.15.0",
     "mobx-react-lite": "^4.1.1",
@@ -30,6 +29,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "globals": "^16.5.0",
+    "sass-embedded": "^1.97.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4"

@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { Engine } from '@babylonjs/core';
-import "@babylonjs/core/Debug/debugLayer"; 
-import "@babylonjs/inspector";
 import { observer } from 'mobx-react-lite';
-import { sceneStore } from './SceneStore';
+import { sceneStore } from './store/SceneStore';
 import { loadEditorScene } from '../runtime/loadScene';
+import { createCamera } from './utils/createCamera';
 
 export const Viewport = observer(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,16 +13,15 @@ export const Viewport = observer(() => {
     const engine = new Engine(canvas, true);
 
     loadEditorScene(engine, canvas).then((scene) => {
-      sceneStore.setScene(scene);
-      scene.debugLayer.show();
+      sceneStore.init(scene);
 
-      scene.onPointerObservable.add((info) => {
-        if (info.pickInfo?.pickedMesh) {
-          sceneStore.select(info.pickInfo.pickedMesh);
-        }
-      });
+      createCamera(scene, canvas);
 
       engine.runRenderLoop(() => scene.render());
+    });
+
+    window.addEventListener('resize', function () {
+      engine.resize();
     });
 
     return () => engine.dispose();
