@@ -1,0 +1,59 @@
+@use '../../../shared/styles/adaptive' as *;
+@use '../../../shared/styles/variables' as *;
+
+.toolBar {
+  display: flex;
+  flex-direction: column;
+  gap: get-responsive-unit(10);
+  align-items: center;
+  background: $icon-bg;
+  color: $text-light;
+  height: fit-content;
+  width: fit-content;
+  border-radius: get-responsive-unit(35);
+  padding: get-responsive-unit(8) get-responsive-unit(8) get-responsive-unit(8);
+  pointer-events: all;
+
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: get-responsive-unit(10);
+    font-size: get-responsive-unit(25);
+  }
+
+  &__button {
+    width: get-responsive-unit(54);
+    height: get-responsive-unit(54);
+    border-radius: 50%;
+    border: none;
+    color: $text-light;
+    background-color: unset;
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
+
+    &.active {
+      background-color: rgba(#919191, 0.4);
+    }
+
+    &_transform {
+      background-image: url('./svg/transform.svg');
+    }
+
+    &_rotate {
+      background-image: url('./svg/rotate.svg');
+    }
+
+    &_scale {
+      background-image: url('./svg/scale.svg');
+    }
+  }
+
+  &__text {
+    color: $text-light;
+  }
+}

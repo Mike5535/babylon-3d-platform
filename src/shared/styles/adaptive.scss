@@ -1,0 +1,3 @@
+@function get-responsive-unit($size) {
+  @return calc(var(--responsive-unit) * #{$size});
+}

@@ -1,6 +1,6 @@
 // для дебага
-import '@babylonjs/core/Debug/debugLayer'; // Required for access to the debugLayer property
-import '@babylonjs/inspector'; // Imports the inspector package
+// import '@babylonjs/core/Debug/debugLayer'; // Required for access to the debugLayer property
+// import '@babylonjs/inspector'; // Imports the inspector package
 
 import {
   Engine,
@@ -8,21 +8,27 @@ import {
   Vector3,
   PhysicsAggregate,
   PhysicsShapeType,
-  Mesh
+  Mesh,
 } from '@babylonjs/core';
 import './index.scss';
-import { appStore } from '../store';
+import { appStore } from '../store/appStore';
 import HavokPhysics from '@babylonjs/havok';
 import { initCharacterController } from './character';
 import { useOnMount } from '../shared/hooks/onMount';
 import { createShadows, loadScene } from '../shared/utils/loadeScene';
 import { indexdbStore } from '../store/IndexdbStore';
-import { CHARACTER_NODE_NAME, SCENE_BUILD_DB_KEY } from '../shared/consts';
+import {
+  CHARACTER_NODE_NAME,
+  SCENE_BUILD_DB_KEY,
+  SCENE_LOGIC_KEY,
+} from '../shared/consts';
 import { useRef } from 'react';
 import { useOnUnMount } from '../shared/hooks/onUnMount';
+import { LogicRuntime } from './logic/LogicRuntime';
 
 export const Runtime = () => {
   const engineRef = useRef<Engine>(null);
+  const logicRuntimeRef = useRef<LogicRuntime>(null);
 
   useOnMount(async () => {
     const canvas = document.getElementById(
@@ -59,6 +65,7 @@ export const Runtime = () => {
             { mass: mesh.name === CHARACTER_NODE_NAME ? 1 : 0 },
             scene
           );
+          mesh.physicsBody?.setCollisionCallbackEnabled(true);
         }
       });
 
@@ -70,11 +77,25 @@ export const Runtime = () => {
         });
         initCharacterController(scene, characterMesh as Mesh, {
           height: 0.55,
-          radius: 0.2,
+          radius: 0.13,
         });
       }
 
-      engine.runRenderLoop(() => scene.render());
+      let data = {};
+      const sceneLogicString = localStorage.getItem(SCENE_LOGIC_KEY);
+
+      if (sceneLogicString) {
+        data = JSON.parse(sceneLogicString);
+      } else {
+        const response = await fetch('/scenes/scene-logic.json');
+        data = await response.json();
+      }
+
+      logicRuntimeRef.current = new LogicRuntime(scene, data);
+
+      engine.runRenderLoop(() => {
+        scene.render();
+      });
     });
 
     window.addEventListener('resize', function () {
@@ -83,12 +104,14 @@ export const Runtime = () => {
   });
 
   useOnUnMount(() => {
+    logicRuntimeRef.current?.dispose();
     engineRef.current?.dispose();
   });
 
   return (
-    <button className="back-button" onClick={() => appStore.setMode('editor')}>
-      Back
-    </button>
+    <button
+      className="back-button"
+      onClick={() => appStore.setMode('editor')}
+    />
   );
 };

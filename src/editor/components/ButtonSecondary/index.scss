@@ -1,0 +1,58 @@
+@use '../../../shared/styles/adaptive' as *;
+@use '../../../shared/styles/variables' as *;
+
+.buttonSecondary {
+  background: $icon-bg;
+  border: none;
+  padding: get-responsive-unit(12) get-responsive-unit(22);
+  border-radius: get-responsive-unit(35);
+  display: flex;
+  align-items: center;
+  gap: get-responsive-unit(8);
+  font-size: get-responsive-unit(35);
+  height: get-responsive-unit(50);
+  width: get-responsive-unit(80);
+  cursor: pointer;
+  pointer-events: all;
+  background-size: 35%;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: get-responsive-unit(5) 0 0 get-responsive-unit(23);
+
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: get-responsive-unit(10);
+    font-size: get-responsive-unit(25);
+  }
+
+  &_save {
+    background-image: url('./svg/save.svg');
+  }
+
+  &_copy {
+    background-image: url('./svg/copy.svg');
+  }
+
+  &_copy.disabled {
+    background-image: url('./svg/copy_disabled.svg');
+  }
+
+  &_delete {
+    background-image: url('./svg/delete.svg');
+  }
+
+  &_delete.disabled {
+    background-image: url('./svg/delete_disabled.svg');
+  }
+
+  &_back {
+    background-image: url('./svg/back.svg');
+    background-size: 40%;
+  }
+
+  &.disabled {
+    background-color: rgba(0, 0, 0, 0.35);
+  }
+}

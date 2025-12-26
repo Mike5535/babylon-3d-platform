@@ -1,0 +1,118 @@
+@use '../../../shared/styles/adaptive' as *;
+@use '../../../shared/styles/variables' as *;
+
+@mixin menu {
+  position: absolute;
+  width: get-responsive-unit(260);
+  background: #ffffff;
+  border-radius: get-responsive-unit(12);
+  box-shadow: 0 get-responsive-unit(10) get-responsive-unit(30)
+    rgba(0, 0, 0, 0.12);
+  padding: get-responsive-unit(8);
+}
+
+.rulebook {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  font-family: Inter, sans-serif;
+  pointer-events: all;
+  color: black;
+
+  .backButton {
+    position: absolute;
+    z-index: 100;
+    top: get-responsive-unit(45);
+    left: get-responsive-unit(45);
+  }
+
+  .title {
+    font-size: get-responsive-unit(60);
+    font-weight: 600;
+    margin: get-responsive-unit(60) 0 0 get-responsive-unit(150);
+  }
+
+  .rule {
+    display: flex;
+    width: 100%;
+    background: #f5f5f5;
+    border-radius: get-responsive-unit(20);
+    padding: get-responsive-unit(12) get-responsive-unit(12) get-responsive-unit(4);
+    margin-bottom: get-responsive-unit(16);
+  }
+
+  .ruleWrapper {
+    width: get-responsive-unit(700);
+    margin: get-responsive-unit(80) auto 0;
+  }
+
+  .ruleContent {
+    position: relative;
+    flex: 1;
+  }
+
+  .condition,
+  .action {
+    background: #ffffff;
+    border-radius: get-responsive-unit(8);
+    padding: get-responsive-unit(10) get-responsive-unit(12);
+    margin-bottom: get-responsive-unit(8);
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      background: #ede7ff;
+    }
+  }
+
+  .condition-menu {
+    @include menu;
+    left: calc(min(get-responsive-unit(660), 55vw));
+    top: get-responsive-unit(5);
+  }
+
+  .action-menu {
+    @include menu;
+    left: calc(min(get-responsive-unit(660), 55vw));
+    top: get-responsive-unit(50);
+  }
+
+  .menu-item {
+    padding: get-responsive-unit(10) get-responsive-unit(12);
+    border-radius: get-responsive-unit(8);
+    cursor: pointer;
+  }
+
+  .menu-item:hover {
+    background: #f1f1f1;
+  }
+
+  .add-rule {
+    margin-top: get-responsive-unit(16);
+    padding: get-responsive-unit(10) get-responsive-unit(14);
+    border-radius: get-responsive-unit(8);
+    border: none;
+    background: #6c4cff;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .add-rule:hover {
+    background: #5a3ee6;
+  }
+
+  .ruleDeleteButton {
+    height: get-responsive-unit(40);
+    width: get-responsive-unit(40);
+    background-image: url('./svg/cross_delete.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+}

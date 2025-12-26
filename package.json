@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "build:runtime": "vite build --config vite.runtime.config.ts"
   },
   "dependencies": {
@@ -14,6 +14,7 @@
     "@babylonjs/inspector": "^8.42.0-preview",
     "@babylonjs/loaders": "^8.42.0",
     "@babylonjs/serializers": "^8.42.0",
+    "file-saver": "^2.0.5",
     "idb": "^8.0.3",
     "mobx": "^6.15.0",
     "mobx-react-lite": "^4.1.1",

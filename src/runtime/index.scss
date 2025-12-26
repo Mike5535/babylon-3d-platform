@@ -1,6 +1,26 @@
+@use '../shared/styles/variables' as *;
+@use '../shared/styles/adaptive' as *;
+
 .back-button {
   position: absolute;
   z-index: 10;
-  top: 0;
-  left: 0;
+  top: get-responsive-unit(45);
+  left: get-responsive-unit(45);
+  background: $icon-bg;
+  border: none;
+  padding: get-responsive-unit(12) get-responsive-unit(22);
+  border-radius: get-responsive-unit(35);
+  display: flex;
+  align-items: center;
+  gap: get-responsive-unit(8);
+  font-size: get-responsive-unit(35);
+  height: get-responsive-unit(50);
+  width: get-responsive-unit(80);
+  cursor: pointer;
+  pointer-events: all;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: get-responsive-unit(5) 0 0 get-responsive-unit(23);
+  background-image: url('./svg/back_home.svg');
 }

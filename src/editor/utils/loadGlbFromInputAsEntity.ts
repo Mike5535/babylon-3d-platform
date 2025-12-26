@@ -1,7 +1,14 @@
-import { TransformNode, LoadAssetContainerAsync, Scene, Quaternion } from '@babylonjs/core';
+import {
+  TransformNode,
+  LoadAssetContainerAsync,
+  Scene,
+  Quaternion,
+  AbstractMesh,
+} from '@babylonjs/core';
 import { computeCenterWorld } from './computeCenterWorld';
+import { makeUniqueMeshesId } from '../../shared/utils/makeUniqueMeshesId';
 
-export const loadGlbFromInputAsEntity = async(
+export const loadGlbFromInputAsEntity = async (
   scene: Scene,
   file: File,
   entityId: string
@@ -9,7 +16,9 @@ export const loadGlbFromInputAsEntity = async(
   const container = await LoadAssetContainerAsync(file, scene);
   container.addAllToScene();
 
-  const modelRoot = (container.rootNodes[0] as TransformNode);
+  const modelRoot = container.rootNodes[0] as TransformNode;
+
+  makeUniqueMeshesId(modelRoot);
 
   const centerWorld = computeCenterWorld(container.meshes);
 
@@ -18,8 +27,12 @@ export const loadGlbFromInputAsEntity = async(
   entity.setAbsolutePosition(centerWorld);
   entity.rotationQuaternion = Quaternion.Identity();
 
-  modelRoot.setParent(entity);
+  modelRoot.getChildren().forEach((mesh) => {
+    mesh.parent = entity;
+    mesh.id = mesh.id + Date.now();
+  });
+
+  modelRoot.dispose();
 
   return entity;
-}
-
+};

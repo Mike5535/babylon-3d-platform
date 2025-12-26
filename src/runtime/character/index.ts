@@ -218,14 +218,27 @@ export const initCharacterController = (
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case KeyboardEventTypes.KEYDOWN:
-        if (kbInfo.event.key == 'w' || kbInfo.event.key == 'ArrowUp') {
+        if (
+          kbInfo.event.key == 'w' ||
+          kbInfo.event.key == 'ц' ||
+          kbInfo.event.key == 'ArrowUp'
+        ) {
           inputDirection.z = 1;
-        } else if (kbInfo.event.key == 's' || kbInfo.event.key == 'ArrowDown') {
+        } else if (
+          kbInfo.event.key == 's' ||
+          kbInfo.event.key == 'ы' ||
+          kbInfo.event.key == 'ArrowDown'
+        ) {
           inputDirection.z = -1;
-        } else if (kbInfo.event.key == 'a' || kbInfo.event.key == 'ArrowLeft') {
+        } else if (
+          kbInfo.event.key == 'a' ||
+          kbInfo.event.key == 'ф' ||
+          kbInfo.event.key == 'ArrowLeft'
+        ) {
           inputDirection.x = -1;
         } else if (
           kbInfo.event.key == 'd' ||
+          kbInfo.event.key == 'в' ||
           kbInfo.event.key == 'ArrowRight'
         ) {
           inputDirection.x = 1;
@@ -237,6 +250,8 @@ export const initCharacterController = (
         if (
           kbInfo.event.key == 'w' ||
           kbInfo.event.key == 's' ||
+          kbInfo.event.key == 'ц' ||
+          kbInfo.event.key == 'ы' ||
           kbInfo.event.key == 'ArrowUp' ||
           kbInfo.event.key == 'ArrowDown'
         ) {
@@ -245,6 +260,8 @@ export const initCharacterController = (
         if (
           kbInfo.event.key == 'a' ||
           kbInfo.event.key == 'd' ||
+          kbInfo.event.key == 'ф' ||
+          kbInfo.event.key == 'в' ||
           kbInfo.event.key == 'ArrowLeft' ||
           kbInfo.event.key == 'ArrowRight'
         ) {
@@ -256,5 +273,5 @@ export const initCharacterController = (
     }
   });
 
-  return scene;
+  return { scene, characterController };
 };

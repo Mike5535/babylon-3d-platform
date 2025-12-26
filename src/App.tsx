@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import { Viewport } from './editor';
+import { Editor } from './editor';
 import { Runtime } from './runtime';
-import { appStore } from './store';
+import { appStore } from './store/appStore';
 
 export default observer(function App() {
-  return <>{appStore.mode === 'editor' ? <Viewport /> : <Runtime />}</>;
+  return <>{appStore.mode === 'editor' ? <Editor /> : <Runtime />}</>;
 });

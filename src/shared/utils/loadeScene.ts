@@ -38,6 +38,10 @@ export async function loadScene({
   );
   container.addAllToScene();
 
+  scene.transformNodes.forEach((mesh) => {
+    mesh.setParent(null);
+  });
+
   scene.meshes.forEach((mesh) => {
     if (mesh.name !== CHARACTER_NODE_NAME) {
       const entity = new TransformNode(mesh.id, scene);
@@ -56,11 +60,11 @@ export async function loadScene({
     }
   });
 
-  scene.transformNodes.forEach((mesh) => {
-    mesh.setParent(null);
-  });
+  const nodesToRemove = scene
+    .getNodes()
+    .filter((node) => node.id === '__root__');
 
-  scene.getMeshById('__root__')?.dispose();
+  nodesToRemove.forEach((node) => node.dispose());
 
   scene.clearColor = new Color4(0.49, 0.78, 0.99, 1);
 
@@ -75,12 +79,8 @@ export const createShadows = (scene: Scene) => {
   });
 
   const sun = scene.getLightByName('Sun');
-  const hemiLight = new HemisphericLight(
-    'hemi',
-    new Vector3(0, 1, 0),
-    scene
-  );
-  hemiLight.intensity = 0.2; 
+  const hemiLight = new HemisphericLight('hemi', new Vector3(0, 1, 0), scene);
+  hemiLight.intensity = 0.2;
   hemiLight.groundColor = new Color3(0.49, 0.78, 0.99);
 
   const shadowGenerator = new ShadowGenerator(1024, sun as IShadowLight);

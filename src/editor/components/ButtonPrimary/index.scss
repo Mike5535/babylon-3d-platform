@@ -1,0 +1,58 @@
+@use '../../../shared/styles/adaptive' as *;
+@use '../../../shared/styles/variables' as *;
+
+.buttonPrimary {
+  background: $icon-bg;
+  border: none;
+  color: $text-light;
+  padding: get-responsive-unit(12) get-responsive-unit(22);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  gap: get-responsive-unit(8);
+  font-size: get-responsive-unit(35);
+  height: get-responsive-unit(70);
+  width: get-responsive-unit(70);
+  cursor: pointer;
+  pointer-events: all;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: get-responsive-unit(10);
+    font-size: get-responsive-unit(25);
+    word-wrap: break-word;
+  }
+
+  &_play {
+    background-image: url('./svg/play.svg');
+    padding: get-responsive-unit(5) 0 0 get-responsive-unit(23);
+    background-position: 55% center;
+    background-size: 40%;
+  }
+
+  &_download {
+    background-image: url('./svg/download.svg');
+    background-size: 50%;
+  }
+
+  &_add {
+    background-image: url('./svg/add.svg');
+    background-size: 50%;
+  }
+
+  &_rulesBook {
+    background-image: url('./svg/book_of_rules.svg');
+    background-size: 60%;
+  }
+
+  &__text {
+    text-align: center;
+    width: min-content;
+    display: block;
+    line-height: get-responsive-unit(30);
+  }
+}

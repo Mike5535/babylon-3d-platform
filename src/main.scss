@@ -13,3 +13,11 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
+:root {
+  --responsive-unit: 0.1vw;
+
+  @media screen and (min-width: 1000px) {
+    --responsive-unit: 1px;
+  }
+}
